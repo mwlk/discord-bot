@@ -1,4 +1,7 @@
 const { Client, Intents } = require("discord.js");
+require('dotenv').config()
+
+const _token = process.env.TOKEN;
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -15,24 +18,24 @@ client.once("ready", (bot) => {
 client.on("messageCreate", async (message) => {
   if (message.channel.type === "dm" || message.author.bot) return;
 
-  let prefix = '!';
+  let prefix = "!";
 
-  if(!message.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(prefix)) return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase()
+  const command = args.shift().toLowerCase();
 
-  if(command === 'start'){
-    message.channel.send("Welcome to Dicsyto")
+  if (command === "start") {
+    message.channel.send("Welcome to Dicsyto");
   }
 
-  if(command === 'help'){
-    message.reply(`this is a test`)
+  if (command === "help") {
+    message.reply(`this is a test`);
   }
 
-  if(command !== 'start' && command !== 'help'){
-    message.reply('command not found')
+  if (command !== "start" && command !== "help") {
+    message.reply("command not found");
   }
 });
 
-client.login(`OTYxMDkzMDA1MDUyMzUwNTQ1.Ykz9nA.AzeSgJybpotXxbiloVJ_OBF8nOU`)
+client.login(_token);
